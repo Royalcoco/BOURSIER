@@ -1,0 +1,14 @@
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip docker docker-compose postgresql
+
+git clone https://github.com/ton_repo_boursier.git
+cd ton_repo_boursier
+pip install -r requirements.txt
+streamlit run script.py --server.port 8501 --server.enableCORS false &
+
+docker build -t trading-ai .
+docker run -d -p 8501:8501 trading-ai
+
+# Mise à jour de Python et installation des bibliothèques nécessaires
+winget install -e --id Python.Python.3.10
+pip install yfinance pandas numpy matplotlib scikit-learn streamlit requests
